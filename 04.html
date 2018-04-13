@@ -4,12 +4,29 @@
 <head>
     <meta charset="UTF-8">
     <title>Vue的常用指令v-for</title>
+    <style>
+        table{
+            width: 600px;
+            border: 2px solid orangered;
+            text-align: center;
+        }
+
+        thead{
+            background: orangered;
+        }
+    </style>
 </head>
 
 <body>
     <div id="app">
         <table>
-            <thead></thead>
+            <thead>
+                <tr>
+                    <td>name</td>
+                    <td>age</td>
+                    <td>sex</td>
+                </tr>
+            </thead>
             <tbody>
                 <tr v-for="p in persons">
                     <td>{{p.name}}</td>
