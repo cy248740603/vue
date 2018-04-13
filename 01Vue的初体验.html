@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Page Title</title>
+</head>
+<body>
+    <div id="app">
+        <p>
+            {{message}}
+        </p>
+        <input type="text" v-model="message">
+    </div>
+    <script src="js/vue.js"></script>
+    <script>
+        let vm = new Vue({
+            el:'#app',
+            data:{
+                message:'你好,世界!',
+                msg:'我想吃东西'
+            }
+        });
+    </script>
+</body>
+</html>
