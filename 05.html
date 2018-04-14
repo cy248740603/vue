@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Vue常用指令综合练习</title>
+    <style>
+        #app {
+            margin: 5px auto;
+            width: 600px;
+        }
+
+        fieldset {
+            border: 1px solid orangered;
+            margin-bottom: 20px;
+        }
+
+        fieldset input {
+            width: 200px;
+            height: 30px;
+            margin: 10px 0;
+
+        }
+
+        table {
+            width: 600px;
+            border: 2px solid orangered;
+            text-align: center;
+        }
+
+        thead {
+            background: orangered;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <fieldset>
+            <legend>学生录入系统</legend>
+            <div>
+                <span>姓名:</span>
+                <input type="text" placeholder="请输入姓名" v-model="newPerson.name">
+            </div>
+            <div>
+                <span>年龄:</span>
+                <input type="text" placeholder="请输入年龄" v-model="newPerson.age">
+            </div>
+            <div>
+                <span>性别:</span>
+                <select v-model="newPerson.sex">
+                    <option value="男">男</option>
+                    <option value="女">女</option>
+                </select>
+            </div>
+            <div>
+                <span>手机:</span>
+                <input type="text" placeholder="请输入手机" v-model="newPerson.phone">
+            </div>
+            <button @click="creatNewPerson()">创建新用户</button>
+        </fieldset>
+        <table>
+            <thead>
+                <tr>
+                    <td>姓名</td>
+                    <td>年龄</td>
+                    <td>性别</td>
+                    <td>手机</td>
+                    <td>删除</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="(p,index) in persons">
+                    <td>{{p.name}}</td>
+                    <td>{{p.age}}</td>
+                    <td>{{p.sex}}</td>
+                    <td>{{p.phone}}</td>
+                    <td>
+                        <button @click="deletePerson(index)">删除</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <script src="js/vue.js"></script>
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                persons: [
+                    { name: '张三', sex: '男', age: 15, phone: '17097900815' },
+                    { name: '李四', sex: '女', age: 16, phone: '17897900815' },
+                    { name: '王五', sex: '男', age: 17, phone: '17197900815' },
+                    { name: '妞儿', sex: '女', age: 18, phone: '17297900815' }
+                ],
+                newPerson: [
+                    { name: '', sex: '男', age: 0, phone: '' }
+                ]
+            },
+            methods: {
+                creatNewPerson() {
+                    if(this.newPerson.name === ''){
+                        alert('姓名不能为空');
+                        return;
+                    }
+                    if(this.newPerson.age <= 0){
+                        alert('年龄不正确');
+                        return;
+                    }
+                    if(this.newPerson.phone === ''){
+                        alert('手机不正确');
+                        return;
+                    }
+                    this.persons.unshift(this.newPerson);
+                    this.newPerson = { name: '', sex: '男', age: 0, phone: '' };
+                },
+                deletePerson(index){
+                    this.persons.splice(index,1);
+                }
+            }
+        })
+    </script>
+
+</body>
+
+</html>
